@@ -21,9 +21,9 @@
           )
 
           const { token } = response.data
-          localforage.setItem('token', token)
-
-          this.$router.push({ name: 'index' })
+          localforage.setItem('token', token).then(() => {
+            this.$router.push({ name: 'index' })
+          })
         } catch (error) {
           console.log(error)
         }
