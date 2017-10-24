@@ -1,4 +1,4 @@
-# curso-spa-vuejs
+# Curso de Single Page Application com Vue.js
 
 > A Vue.js project
 
