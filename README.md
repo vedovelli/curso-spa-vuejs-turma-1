@@ -1,5 +1,6 @@
 # Curso de Single Page Application com Vue.js
 
+
 > A Vue.js project
 
 ## Build Setup
