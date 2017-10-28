@@ -1,15 +1,20 @@
 
 <script>
   import localforage from 'localforage'
+  import { mapActions, mapGetters, mapState } from 'vuex'
   export default {
     computed: {
+      ...mapGetters(['email']),
+      ...mapState('categories', ['list']),
       shouldDisplayNavigation () {
         return this.$route.name !== 'auth.index'
       }
     },
     methods: {
+      ...mapActions(['removeToken']),
       logout () {
         localforage.removeItem('token').then(() => {
+          this.removeToken()
           this.$router.push({ name: 'auth.index' })
         })
       }
@@ -40,6 +45,9 @@
             <li><router-link :to="{ name: 'users.index' }">Usuários</router-link></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <v-gravatar :email="email" width="50"/>
+            </li>
             <li><a href="#" @click.prevent="logout">Sair</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->

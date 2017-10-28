@@ -1,6 +1,6 @@
 
-import index from './'
-import form from './form'
+const index = () => import('./')
+const form = () => import('./form')
 
 export default [
   {

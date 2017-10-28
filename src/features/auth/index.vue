@@ -1,9 +1,18 @@
 
 <script>
-  import axios from 'axios'
+  import http from '@/service/http'
   import localforage from 'localforage'
+  import { mapActions } from 'vuex'
   export default {
     name: 'Authentication',
+    mounted () {
+      if (window.location.search.indexOf('expired=true') > -1) {
+        this.$bus.$emit('display-alert', {
+          type: 'error',
+          message: 'Token expirado. Favor logar novamente!'
+        })
+      }
+    },
     data () {
       return {
         email: 'vedovelli@gmail.com',
@@ -11,17 +20,19 @@
       }
     },
     methods: {
+      ...mapActions(['setToken']),
       async login () {
         try {
           const { email, password } = this
 
-          const response = await axios.post(
+          const response = await http.post(
             'http://localhost:3456/autenticacao',
             { email, password }
           )
 
           const { token } = response.data
-          localforage.setItem('token', token).then(() => {
+          localforage.setItem('token', token).then((token) => {
+            this.setToken({ token })
             this.$router.push({ name: 'index' })
           })
         } catch (error) {
