@@ -32,6 +32,7 @@
       }
     },
     computed: {
+      ...mapState(['isSearching']),
       ...mapState('categories', ['list']),
       hasCategories () {
         return this.list.length > 0
@@ -70,7 +71,11 @@
       <router-view @update-category-list="updateList"></router-view>
     </transition>
 
-    <div class="no-categories" v-show="!hasCategories">
+    <div style="text-align: center" v-show="isSearching">
+      <img src="../../assets/loading.gif" alt="Loading...">
+    </div>
+
+    <div class="no-categories" v-show="!hasCategories && !isSearching">
       <h4>Não há ainda categorias salvas</h4>
     </div>
 

@@ -6,6 +6,7 @@
     computed: {
       ...mapGetters(['email']),
       ...mapState('categories', ['list']),
+      ...mapState(['isSearching']),
       shouldDisplayNavigation () {
         return this.$route.name !== 'auth.index'
       }
@@ -45,6 +46,9 @@
             <li><router-link :to="{ name: 'users.index' }">Usuários</router-link></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li v-show="isSearching">
+              <img src="./assets/loading.gif" alt="Loading..." width="50">
+            </li>
             <li>
               <v-gravatar :email="email" width="50"/>
             </li>
