@@ -25,11 +25,15 @@ const router = new Router({
 })
 
 const checkAuth = async (to, from, next) => {
-  const token = await localforage.getItem('token')
-  store.dispatch('setToken', { token })
+  if (!to.matched.some(record => record.meta.requiresAuth)) {
+    next()
+  } else {
+    const token = await localforage.getItem('token')
+    store.dispatch('setToken', { token })
 
-  if (to.name !== 'auth.index' && token === null) {
-    next({ name: 'auth.index' })
+    if (token === null) {
+      next({ name: 'auth.index' })
+    }
   }
 }
 

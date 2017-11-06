@@ -7,11 +7,13 @@ export default [
     path: '/categorias',
     name: 'categories.index',
     component: index,
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'form/:id?',
         name: 'categories.form',
-        component: form
+        component: form,
+        meta: { requiresAuth: true }
       }
     ]
   }
