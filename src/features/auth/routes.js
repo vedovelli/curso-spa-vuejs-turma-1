@@ -5,6 +5,7 @@ export default [
   {
     path: '/auth/login',
     name: 'auth.index',
-    component: index
+    component: index,
+    meta: { requiresAuth: false }
   }
 ]

@@ -5,6 +5,7 @@ export default [
   {
     path: '/',
     name: 'index',
-    component: index
+    component: index,
+    meta: { requiresAuth: true }
   }
 ]
