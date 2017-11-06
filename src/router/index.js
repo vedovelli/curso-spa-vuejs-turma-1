@@ -25,7 +25,7 @@ const router = new Router({
 })
 
 const checkAuth = async (to, from, next) => {
-  if (!to.matched.some(record => record.meta.requiresAuth)) {
+  if (!to.meta.requiresAuth) {
     next()
   } else {
     const token = await localforage.getItem('token')
