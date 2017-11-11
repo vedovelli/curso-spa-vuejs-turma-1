@@ -15,8 +15,8 @@
     },
     data () {
       return {
-        email: 'vedovelli@gmail.com',
-        password: '123456'
+        email: '',
+        password: ''
       }
     },
     methods: {
@@ -26,7 +26,7 @@
           const { email, password } = this
 
           const response = await http.post(
-            'http://localhost:3456/autenticacao',
+            '/autenticacao',
             { email, password }
           )
 
