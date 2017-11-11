@@ -3,41 +3,41 @@ import http from '@/service/http'
 import findIndex from 'lodash/findIndex'
 
 const save = async (context, obj) => {
-  const { verb, category } = obj
-  const response = await http[verb]('/categoria', category)
+  const { verb, product } = obj
+  const response = await http[verb]('/produto', product)
 
   if (response != null) {
-    category.id = response.data.category.id
-    update(context, { ...category })
+    product.id = response.data.product.id
+    update(context, { ...product })
     return Promise.resolve()
   }
 }
 
 const fetchOne = async (context, id) => {
-  const response = await http.get(`/categoria/${id}`)
+  const response = await http.get(`/produto/${id}`)
   if (response != null) {
-    return Promise.resolve(response.data.category)
+    return Promise.resolve(response.data.product)
   }
 }
 
 const fetch = async ({ commit }) => {
-  const response = await http.get('/categoria')
+  const response = await http.get('/produto')
   if (response != null) {
-    const categories = response.data
-    commit('SET_LIST', categories)
+    const products = response.data
+    commit('SET_LIST', { products: products.products.slice(0, 10) })
   }
 }
 
 const update = ({ commit, state }, obj) => {
   const index = findIndex(state.list, { id: obj.id })
-  const payload = { category: obj, index }
+  const payload = { product: obj, index }
   commit('SET_ONE', payload)
 }
 
 const remove = ({ commit, state }, obj) => {
   return new Promise(async (resolve) => {
     const { id } = obj
-    const response = await http.delete(`/categoria/${id}`)
+    const response = await http.delete(`/produto/${id}`)
     const { message } = response.data
     const index = findIndex(state.list, { id })
 

@@ -3,11 +3,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import decode from 'jwt-decode'
 import categories from '@app/categories/store'
+import products from '@app/products/store'
 
 Vue.use(Vuex)
 
 const modules = {
-  categories
+  categories,
+  products
 }
 
 export default new Vuex.Store({

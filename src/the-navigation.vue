@@ -43,6 +43,7 @@
           <ul class="nav navbar-nav">
             <li><router-link :to="{ name: 'index' }">Dashboard</router-link></li>
             <li><router-link :to="{ name: 'categories.index' }">Categorias</router-link></li>
+            <li><router-link :to="{ name: 'products.index' }">Produtos</router-link></li>
             <li><router-link :to="{ name: 'users.index' }">Usuários</router-link></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">

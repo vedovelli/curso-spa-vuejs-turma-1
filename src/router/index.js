@@ -8,13 +8,15 @@ import auth from '@app/auth/routes'
 import users from '@app/users/routes'
 import dashboard from '@app/dashboard/routes'
 import categories from '@app/categories/routes'
+import products from '@app/products/routes'
 import store from '@/store'
 
 const routes = [
   ...auth,
   ...users,
   ...dashboard,
-  ...categories
+  ...categories,
+  ...products
 ]
 
 Vue.use(Router)
