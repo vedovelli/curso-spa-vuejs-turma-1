@@ -84,7 +84,7 @@
         class="col-sm-6 col-md-4"
         v-for="category in list"
         :key="category.id">
-        <div class="thumbnail">
+        <div class="thumbnail custom-height">
           <div class="caption">
             <h3>{{ category.name }}</h3>
             <p class="text-right">
@@ -98,6 +98,9 @@
 </template>
 
 <style scoped>
+.custom-height {
+  min-height: 160px;
+}
 .no-categories {
   padding: 35px;
 }

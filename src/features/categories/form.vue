@@ -1,7 +1,7 @@
 
 <script>
-  import http from '@/service/http'
   import { required } from 'vuelidate/lib/validators'
+  import { mapActions } from 'vuex'
   export default {
     name: 'Form',
     data () {
@@ -30,11 +30,11 @@
       }
     },
     methods: {
+      ...mapActions('categories', ['fetchCategory', 'saveCategory']),
       async fetch () {
         const { id } = this.$route.params
         if (id !== undefined) {
-          const response = await http.get(`/categoria/${id}`)
-          this.category = response.data.category
+          this.category = await this.fetchCategory(id)
         }
       },
       async submit () {
@@ -44,19 +44,13 @@
 
         const verb = this.isNew ? 'post' : 'put'
         const { category } = this
-        const response = await http[verb]('/categoria', category)
-        if (response != null) {
-          this.category.id = response.data.category.id
 
-          const category = { ...this.category }
-
-          this.$emit('update-category-list', { category })
-
+        this.saveCategory({ verb, category }).then(() => {
           this.$bus.$emit('display-alert', {
             type: 'success',
             message: 'Categoria salva com sucesso!'
           })
-        }
+        })
       }
     },
     computed: {
